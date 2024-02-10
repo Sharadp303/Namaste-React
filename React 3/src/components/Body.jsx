@@ -9,6 +9,7 @@ const Body = () => {
   const [filList, setFilList] = useState([]);
   const [searchText, setSearchText] = useState("");
 
+  const onlineStatus = useOnlineStatus();
   useEffect(() => {
     fetchData();
   }, []);
@@ -28,28 +29,35 @@ const Body = () => {
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
+
+  console.log(resList.length);
+  if(resList.length === 0){
+   return <Shimmer />
+}
   
-  const onlineStatus=useOnlineStatus();
-  if(onlineStatus===false){
+  if (onlineStatus === false) {
     return (
-      <h1>Looks like you are Offline !! Plese check your internet connection</h1>
-    )
+      <h1 className="text-center text-lg p-5 text-red-600">
+        Looks like you are Offline !! Plese check your internet connection
+      </h1>
+    );
   }
 
-  return resList.length === 0 ? (
-    <Shimmer />
-  ) : (
+
+  return   (
     <>
       <div className="body">
-        <div className="filter">
-          <div className="search">
+        <div className="flex items-center">
+          <div className="search m-4 p-4 ml-28">
             <input
+              className="border border-solid border-black p-1 rounded-sm font-light"
               type="text"
               placeholder="search"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
             />
             <button
+              className="py-2 px-4 ml-4 bg-green-300 font-bold rounded hover:bg-slate-800 hover:text-green-400 "
               onClick={() => {
                 const filterRest = resList.filter((res) =>
                   res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -61,19 +69,22 @@ const Body = () => {
               Search
             </button>
           </div>
-          <button
-            onClick={() => {
-              const filterRes = resList.filter(
-                (res) => res.info.avgRating > 4.3
-              );
-              setFilList(filterRes);
-            }}
-          >
-            Top rated Restaurants
-          </button>
+          <div className=" m-4 p-4">
+            <button
+              className="px-4 py-2 bg-slate-800 text-green-400 rounded-lg  hover:bg-slate-800 hover:text-white"
+              onClick={() => {
+                const filterRes = resList.filter(
+                  (res) => res.info.avgRating > 4.3
+                );
+                setFilList(filterRes);
+              }}
+            >
+              Top rated Restaurants
+            </button>
+          </div>
         </div>
 
-        <div className="res-container">
+        <div className="flex flex-wrap mx-36">
           {filList.map((restaurant) => {
             return (
               <Link

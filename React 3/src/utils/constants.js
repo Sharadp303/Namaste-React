@@ -1,2 +1,2 @@
 export const CDN_URL="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"
-export const LOGO_URL="https://e7.pngegg.com/pngimages/815/847/png-clipart-take-out-android-sindelantal-app-food-text.png"
+export const LOGO_URL="https://i.pinimg.com/originals/90/e3/fd/90e3fdac04af6cbce878987feca77424.jpg"
