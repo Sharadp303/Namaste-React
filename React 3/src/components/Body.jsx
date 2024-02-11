@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import React, { useContext, useEffect, useState } from "react";
+import RestaurantCard ,{withPromotedOffer} from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [resList, setResList] = useState([]);
   const [filList, setFilList] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const RestaurantCardPromoted=withPromotedOffer(RestaurantCard)
+  const {loggedInUser,setUserName}=useContext(UserContext)
 
   const onlineStatus = useOnlineStatus();
   useEffect(() => {
@@ -30,7 +34,7 @@ const Body = () => {
     );
   };
 
-  console.log(resList.length);
+  // console.log(resList.length);
   if(resList.length === 0){
    return <Shimmer />
 }
@@ -82,6 +86,10 @@ const Body = () => {
               Top rated Restaurants
             </button>
           </div>
+          <div>
+            <label >UserName</label>
+            <input type="text" className="border border-black p-2" value={loggedInUser} onChange={(e)=>setUserName(e.target.value)}/>
+          </div>
         </div>
 
         <div className="flex flex-wrap mx-36">
@@ -91,7 +99,14 @@ const Body = () => {
                 key={restaurant.info.id}
                 to={`restaurants/${restaurant.info.id}`}
               >
-                <RestaurantCard resdata={restaurant} />
+               
+                {/* If the restaurant is avglist */
+                restaurant.info.
+                aggregatedDiscountInfoV3?
+                 (<RestaurantCardPromoted resdata={restaurant} offer={restaurant.info.
+                  aggregatedDiscountInfoV3}/>) :(<RestaurantCard resdata={restaurant} />)
+                }
+                
               </Link>
             );
           })}

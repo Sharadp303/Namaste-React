@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [loginBtn, setLoginBtn] = useState("Login");
 
+  //Subscribing to the store using selector
+  const cartItems=useSelector((store)=>store.cart.items)
+  console.log(cartItems);
+
   const onlineStatus = useOnlineStatus();
+  const { loggedInUser } = useContext(UserContext);
 
   return (
     <div className="flex justify-around flex-wrap bg-pink-200 shadow-lg sm:bg-gray-100">
@@ -16,7 +23,6 @@ const Header = () => {
             className="w-36 mix-blend-exclusion object-cover"
             src={LOGO_URL}
             alt="logo"
-            
           />
         </Link>
       </div>
@@ -36,18 +42,23 @@ const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li className="px-4 hover:text-blue-900 hover:border rounded">
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart">Cart-({cartItems.length} item)</Link>
           </li>
-          <button
-            className="px-4 py-2 ml-2 border border-solid rounded font-bold border-black hover:bg-slate-50"
-            onClick={() => {
-              loginBtn === "Login"
-                ? setLoginBtn("Logout")
-                : setLoginBtn("Login");
-            }}
-          >
-            {loginBtn}
-          </button>
+          {!loggedInUser ? (
+            <button
+              className="px-4 py-2 ml-2 border border-solid rounded font-bold border-black hover:bg-slate-50"
+              onClick={() => {
+                loginBtn === "Login"
+                  ? setLoginBtn("Logout")
+                  : setLoginBtn("Login");
+              }}
+            >
+              {loginBtn}
+            </button>
+
+          ) : (
+            <li className="px-4">{loggedInUser}</li>
+          )}
         </ul>
       </div>
     </div>
