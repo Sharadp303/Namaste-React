@@ -9,7 +9,7 @@ const Header = () => {
   const [loginBtn, setLoginBtn] = useState("Login");
 
   //Subscribing to the store using selector
-  const cartItems=useSelector((store)=>store.cart.items)
+  const cartItems = useSelector((store) => store.cart.items);
   console.log(cartItems);
 
   const onlineStatus = useOnlineStatus();
@@ -42,7 +42,12 @@ const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li className="px-4 hover:text-blue-900 hover:border rounded">
-            <Link to="/cart">Cart-({cartItems.length} item)</Link>
+            <Link to="/cart">
+              Cart
+              <span className="text-xs text-white font-bold bg-emerald-500 rounded-full p-1 relative -top-3 ">
+                {cartItems.length}
+              </span>
+            </Link>
           </li>
           {!loggedInUser ? (
             <button
@@ -55,7 +60,6 @@ const Header = () => {
             >
               {loginBtn}
             </button>
-
           ) : (
             <li className="px-4">{loggedInUser}</li>
           )}

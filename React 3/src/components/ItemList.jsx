@@ -8,6 +8,7 @@ const ItemList = ({ item }) => {
 
   const handleAddItem=(item)=>{
     //dispatch an Action
+    item['quantity']=1
     dispatch(addItem(item))
   }
   //   console.log(item);

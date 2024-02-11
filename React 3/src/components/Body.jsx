@@ -4,14 +4,16 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useHomeQuery } from "../utils/apiSlice.js";
 
 const Body = () => {
   const [resList, setResList] = useState([]);
   const [filList, setFilList] = useState([]);
   const [searchText, setSearchText] = useState("");
+  
+  const {loggedInUser,setUserName}=useContext(UserContext)
 
   const RestaurantCardPromoted=withPromotedOffer(RestaurantCard)
-  const {loggedInUser,setUserName}=useContext(UserContext)
 
   const onlineStatus = useOnlineStatus();
   useEffect(() => {
@@ -23,9 +25,9 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.07480&lng=72.88560&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(
-      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-    );
+    // console.log(
+    //   json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+    // );
     setResList(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
