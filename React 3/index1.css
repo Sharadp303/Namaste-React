@@ -25,7 +25,6 @@
   padding: 10px;
   margin: 10px;
   cursor: pointer;
-
 }
 
 .res-container {
@@ -46,10 +45,12 @@
   width: 200px;
   transition-delay: 0.2s;
 }
+
 .res-card:hover {
   border: 1px solid black;
   cursor: pointer;
 }
+
 .search {
   padding: 10px;
 }
@@ -57,9 +58,10 @@
   display: flex;
   justify-content: center;
   padding: 30px;
-  /* background-color: aqua; */
+  /*background-color: aqua; */
   flex-wrap: wrap;
 }
+
 .shimmer-card {
   padding: 15px;
   margin: 15px;

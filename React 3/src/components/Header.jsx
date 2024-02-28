@@ -10,7 +10,7 @@ const Header = () => {
 
   //Subscribing to the store using selector
   const cartItems = useSelector((store) => store.cart.items);
-  console.log(cartItems);
+  // console.log(cartItems);
 
   const onlineStatus = useOnlineStatus();
   const { loggedInUser } = useContext(UserContext);
@@ -45,11 +45,13 @@ const Header = () => {
             <Link to="/cart">
               Cart
               <span className="text-xs text-white font-bold bg-emerald-500 rounded-full p-1 relative -top-3 ">
-                {cartItems.length}
+                {cartItems.reduce((quantity,item)=>{
+                  return quantity+=item.quantity
+                },0)}
               </span>
             </Link>
           </li>
-          {!loggedInUser ? (
+          {loggedInUser ? (
             <button
               className="px-4 py-2 ml-2 border border-solid rounded font-bold border-black hover:bg-slate-50"
               onClick={() => {

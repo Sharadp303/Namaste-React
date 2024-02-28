@@ -2,12 +2,12 @@ import React from "react";
 import { CDN_URL } from "../utils/constants";
 
 const RestaurantCard = ({ resdata }) => {
-  // console.log(resdata.info);
+  // console.log(resdata);
   const { name, cloudinaryImageId, cuisines, avgRating, costForTwo, sla } =
     resdata?.info;
 
   return (
-    <div className="m-4 p-4 w-[260px]  bg-orange-100 rounded-lg hover:bg-orange-300">
+    <div data-testid="resCard" className="m-4 p-4 w-[260px]  bg-orange-100 rounded-lg hover:bg-orange-300">
       <img
         className="rounded-lg h-48 w-full object-cover "
         src={`${CDN_URL}${cloudinaryImageId}`}

@@ -16,7 +16,7 @@ const ItemList = ({ item }) => {
     defaultPrice
     } = item;
   return (
-    <div className="flex justify-between items-center p-4 border-b-2 border-gray-400">
+    <div data-testid='itemList' className="flex justify-between items-center p-4 border-b-2 border-gray-400">
       <div className=" p-4 my-2 text-left w-9/12">
         <h2 className="font-semibold">{name}</h2>
         <span>₹ {price?price / 100:defaultPrice/100}</span>

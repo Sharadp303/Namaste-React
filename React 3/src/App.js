@@ -25,7 +25,7 @@ const Grocery = lazy(() => import("./components/Grocery"));
 // const jsxHeading = <h2>Hello from JSX</h2>;
 
 const AppLayout = () => {
-  const [userName, setUserName] = useState();
+  const [userName, setUserName] = useState('');
 
   //authentication
   useEffect(() => {

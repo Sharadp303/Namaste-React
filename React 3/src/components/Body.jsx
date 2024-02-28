@@ -25,6 +25,7 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.07480&lng=72.88560&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
+    
     // console.log(
     //   json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
     // );
@@ -56,6 +57,7 @@ const Body = () => {
         <div className="flex items-center">
           <div className="search m-4 p-4 ml-28">
             <input
+              data-testid='searchInput'
               className="border border-solid border-black p-1 rounded-sm font-light"
               type="text"
               placeholder="search"
@@ -96,6 +98,7 @@ const Body = () => {
 
         <div className="flex flex-wrap mx-36">
           {filList.map((restaurant) => {
+            
             return (
               <Link
                 key={restaurant.info.id}

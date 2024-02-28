@@ -49,6 +49,7 @@ const Cart = () => {
           {cartItems.map((item) => {
             return (
               <div
+                data-testid='cartItem'
                 key={item.id}
                 className="flex justify-between items-center p-4 border-b-2 border-gray-400"
               >
